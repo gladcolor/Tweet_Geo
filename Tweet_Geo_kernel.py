@@ -20,7 +20,7 @@ class Localization():
                 user_df,
                 model='gpt-3.5-turbo-0613',
                 max_tweet=100,
-                used_cols=['description', 'location']
+                used_cols=['id', 'description', 'location'],
                   
                 ):
         assert len(user_df) <= max_tweet, f"The tweet count is {len(user_df)}; it should <= {max_tweet}!"

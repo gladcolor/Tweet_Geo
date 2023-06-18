@@ -86,3 +86,30 @@ def get_LLM_reply(prompt="Provide Python code to read a CSV file from this URL a
     response = response_chucks # good for saving
     
     return response
+
+
+def extract_content_from_LLM_reply(response):
+    stream = False
+    if isinstance(response, list):
+        stream = True
+        
+    content = ""
+    if stream:       
+        for chunk in response:
+            chunk_content = chunk["choices"][0].get("delta", {}).get("content")         
+
+            if chunk_content is not None:
+                # print(chunk_content, end='')
+                content += chunk_content
+                # print(content)
+        # print()
+    else:
+        content = response["choices"][0]['message']["content"]
+        # print(content)
+        
+    return content
+
+def location_str_to_list(location_str):
+    loc_list = location_str.split(";")
+    loc_list = [l.split(":") for l in loc_list]
+    return loc_list
