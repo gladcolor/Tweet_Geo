@@ -110,6 +110,6 @@ def extract_content_from_LLM_reply(response):
     return content
 
 def location_str_to_list(location_str):
-    loc_list = location_str.split(";")
+    loc_list = location_str.replace("\n", "").split(";")
     loc_list = [l.split(":") for l in loc_list]
     return loc_list
